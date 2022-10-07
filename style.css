@@ -470,6 +470,8 @@ footer .copyright{
 
 
 /* Media Query */
+
+
 /*for tablet screens*/
 @media (max-width:799px) {
     .section-p1{
@@ -564,6 +566,10 @@ footer .copyright{
         width: 70%;
     }
 }
+
+
+
+
 /* Phone screen */
 @media (max-width:477px) {
     .section-p1{
@@ -641,6 +647,27 @@ footer .copyright{
     .prodetails .single-pro-details{
         width: 100%;
     }
+
+    /* BLOG PAGE */
+    .blog{
+        padding: 100px 20px 0 20px;
+    }
+
+    .blog .blog-box {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .blog .blog-img {
+        width: 100%;
+        margin-right: 0px;
+        margin-bottom: 30px;
+    }
+    .blog .blog-details{
+        width: 100%;
+    }
+
+
 }
 
 /* SHOP PAGE*/
