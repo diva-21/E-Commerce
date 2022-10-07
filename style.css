@@ -470,6 +470,7 @@ footer .copyright{
 
 
 /* Media Query */
+/*for tablet screens*/
 @media (max-width:799px) {
     .section-p1{
         padding: 40px 40px;
@@ -563,6 +564,7 @@ footer .copyright{
         width: 70%;
     }
 }
+/* Phone screen */
 @media (max-width:477px) {
     .section-p1{
         padding: 20px 20px;
@@ -623,7 +625,22 @@ footer .copyright{
     footer .copyright{
         text-align: start;
     }
-    
+
+
+
+    /* single product */
+    .prodetails{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .prodetails .single-pro-image{
+        width: 100%;
+        margin-right: 0px;
+    }
+    .prodetails .single-pro-details{
+        width: 100%;
+    }
 }
 
 /* SHOP PAGE*/
@@ -712,5 +729,5 @@ footer .copyright{
 }
 .prodetails .single-pro-details span{
     line-height: 25px;
-    
+
 }
