@@ -7,6 +7,7 @@ if(bar){
         nav.classList.add('active');
     })
 }
+// to remove from the screen
 if('close'){
     close.addEventListener('click',()=>{
         nav.classList.remove('active');
