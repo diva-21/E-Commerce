@@ -20,31 +20,32 @@ let products = [
   {
     name: "Cartton T-shirt rainbow",
     tag: "tshirtrainbow",
-    price: 15,
+    price: 55,
     inCart: 0,
   },
   {
     name: "Cartton T-shirt green",
     tag: "tshirtgreen",
-    price: 15,
+    price: 25,
     inCart: 0,
   },
   {
     name: "Cartton T-shirt red",
     tag: "tshirtred",
-    price: 15,
+    price: 35,
     inCart: 0,
   },
   {
     name: "Cartton T-shirt pink",
     tag: "tshirtpink",
-    price: 15,
+    price: 45,
     inCart: 0,
   },
 ];
 for (let i = 0; i < carts.length; i++) {
   carts[i].addEventListener("click", (event) => {
     cartNumbers(products[i]);
+    totalCost(products[i]);
     event.preventDefault(); // on click it will not refresh the whole page
   });
 }
@@ -59,7 +60,7 @@ function onLoadCartNumbers() {
 function cartNumbers(product) {
   let productNumbers = localStorage.getItem("cartNumbers");
   productNumbers = parseInt(productNumbers);
-  console.log("The product clicked is", product);
+//   console.log("The product clicked is", product);
   if (productNumbers) {
     localStorage.setItem("cartNumbers", productNumbers + 1);
     document.querySelector(".cart-num span").textContent = productNumbers + 1;
@@ -73,13 +74,13 @@ function setItems(product) {
   let cartItems = localStorage.getItem("productsInCart");
   cartItems = JSON.parse(cartItems); // to convert the string into json object
   if (cartItems != null) {
-    // if some object is already present, 
+    // if some object is already present,
     // then we will check if the product is already present or not
     if (cartItems[product.tag] == undefined) {
-        // if not, then we will add the product with existing old keys
+      // if not, then we will add the product with existing old keys
       cartItems = {
         ...cartItems, // spread operator for destructuring the key value pairs of the object
-        [product.tag]: product // this will add the new key value pair
+        [product.tag]: product, // this will add the new key value pair
       };
     }
     // if its a new item then it will increase the inCart from 0 to 1,
@@ -96,5 +97,15 @@ function setItems(product) {
   }
   // setting the cartItems in the local storage where value is of string type
   localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+}
+function totalCost(product){
+    // console.log("The product price is", product.price);
+    let cartCost = localStorage.getItem('totalCost');
+    if(cartCost != null){
+        cartCost = parseInt(cartCost);
+        localStorage.setItem("totalCost", cartCost + product.price);
+    }else{
+        localStorage.setItem("totalCost", product.price);
+    }
 }
 onLoadCartNumbers();
