@@ -108,4 +108,39 @@ function totalCost(product){
         localStorage.setItem("totalCost", product.price);
     }
 }
+let imgmapper={
+    "tshirtrainbow":"img/products/f1.jpg",
+    "tshirtgreen":"img/products/f2.jpg",
+    "tshirtred":"img/products/f3.jpg",
+    "tshirtpink":"img/products/f4.jpg",
+}
+function displayCart(){
+    let cartItems=localStorage.getItem('productsInCart');
+    let cartCost=localStorage.getItem('totalCost');
+    cartItems=JSON.parse(cartItems);
+    let productContainer=document.querySelector('.products');
+    if(cartItems && productContainer){
+        productContainer.innerHTML='';
+        Object.values(cartItems).map(item=>{
+            productContainer.innerHTML += `
+            <tr>
+                <td><a href="#"><i class="far fa-times-circle"></i></a></td>
+                <td><img src=${imgmapper[item.tag]} alt=""></td>
+                <td>${item.tag}</td>
+                <td>Rs ${item.price}</td>
+                <td><input type="number" value="${item.inCart}"></td>
+                <td>Rs ${item.price*item.inCart}</td>
+            </tr>
+            `
+        });
+        productContainer.innerHTML += `
+        <div class="basketTotalContainer">
+            <h4 class="basketTotalTitle">Basket Total</h4>
+            <h4 class="basketTotal">Rs ${cartCost}</h4>
+        </div>
+        `
+    }
+
+}
+displayCart();
 onLoadCartNumbers();

@@ -516,6 +516,21 @@ footer .copyright{
 .cart table tbody tr td{
     padding-top: 15px;
 }
+.basketTotalContainer{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 1000px;
+    padding: 10px 0;   
+}
+
+.basketTotalTitle{
+    width:30%;
+    margin-right: 150px;
+}
+.basketTotal{
+    margin-left: 50px;
+    width: 50%;
+}
 
 /* Media Query */
 
