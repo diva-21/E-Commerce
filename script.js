@@ -170,7 +170,7 @@ function displayCart(){
           <tr>
               <td><a href="#"><i class="far fa-times-circle"></i></a></td>
               <td><img src=${imgmapper[item.tag]} alt=""></td>
-              <td>${item.tag}</td>
+              <td>${item.name}</td>
               <td>Rs ${item.price}</td>
               <td><input type="number" value="${item.inCart}"></td>
               <td>Rs ${item.price*item.inCart}</td>
