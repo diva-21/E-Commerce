@@ -57,18 +57,45 @@ function onLoadCartNumbers() {
   }
 }
 
-function cartNumbers(product) {
-  let productNumbers = localStorage.getItem("cartNumbers");
+// function cartNumbers(product,action) {
+
+//   let productNumbers = localStorage.getItem("cartNumbers");
+//   productNumbers = parseInt(productNumbers);
+//   let cartItems = localStorage.getItem("productsInCart");
+//   cartItems = JSON.parse(cartItems);
+//   if (action) {
+//     localStorage.setItem("cartNumbers", productNumbers - 1);
+//     document.querySelector(".cart-num span").textContent = productNumbers - 1;
+//   }
+// //   console.log("The product clicked is", product);
+//   if (productNumbers) {
+//     localStorage.setItem("cartNumbers", productNumbers + 1);
+//     document.querySelector(".cart-num span").textContent = productNumbers + 1;
+//   } else {
+//     localStorage.setItem("cartNumbers", 1);
+//     document.querySelector(".cart-num span").textContent = 1;
+//   }
+//   setItems(product); // which will keep the whole product in the local storage
+// }
+function cartNumbers(product, action) {
+  let productNumbers = localStorage.getItem('cartNumbers');
   productNumbers = parseInt(productNumbers);
-//   console.log("The product clicked is", product);
-  if (productNumbers) {
-    localStorage.setItem("cartNumbers", productNumbers + 1);
-    document.querySelector(".cart-num span").textContent = productNumbers + 1;
+
+  let cartItems = localStorage.getItem('productsInCart');
+  cartItems = JSON.parse(cartItems);
+
+  if( action ) {
+      localStorage.setItem("cartNumbers", productNumbers - 1);
+      document.querySelector('.cart-num span').textContent = productNumbers - 1;
+      console.log("action running");
+  } else if( productNumbers ) {
+      localStorage.setItem("cartNumbers", productNumbers + 1);
+      document.querySelector('.cart-num span').textContent = productNumbers + 1;
   } else {
-    localStorage.setItem("cartNumbers", 1);
-    document.querySelector(".cart-num span").textContent = 1;
+      localStorage.setItem("cartNumbers", 1);
+      document.querySelector('.cart-num span').textContent = 1;
   }
-  setItems(product); // which will keep the whole product in the local storage
+  setItems(product);
 }
 function setItems(product) {
   let cartItems = localStorage.getItem("productsInCart");
@@ -98,15 +125,32 @@ function setItems(product) {
   // setting the cartItems in the local storage where value is of string type
   localStorage.setItem("productsInCart", JSON.stringify(cartItems));
 }
-function totalCost(product){
-    // console.log("The product price is", product.price);
-    let cartCost = localStorage.getItem('totalCost');
-    if(cartCost != null){
-        cartCost = parseInt(cartCost);
-        localStorage.setItem("totalCost", cartCost + product.price);
-    }else{
-        localStorage.setItem("totalCost", product.price);
-    }
+// function totalCost(product){
+//     // console.log("The product price is", product.price);
+//     let cartCost = localStorage.getItem('totalCost');
+//     if(cartCost != null){
+//         cartCost = parseInt(cartCost);
+//         localStorage.setItem("totalCost", cartCost + product.price);
+//     }else{
+//         localStorage.setItem("totalCost", product.price);
+//     }
+// }
+
+function totalCost( product, action ) {
+  let cart = localStorage.getItem("totalCost");
+
+  if( action) {
+      cart = parseInt(cart);
+
+      localStorage.setItem("totalCost", cart - product.price);
+  } else if(cart != null) {
+      
+      cart = parseInt(cart);
+      localStorage.setItem("totalCost", cart + product.price);
+  
+  } else {
+      localStorage.setItem("totalCost", product.price);
+  }
 }
 let imgmapper={
     "tshirtrainbow":"img/products/f1.jpg",
@@ -122,25 +166,35 @@ function displayCart(){
     if(cartItems && productContainer){
         productContainer.innerHTML='';
         Object.values(cartItems).map(item=>{
-            productContainer.innerHTML += `
-            <tr>
-                <td><a href="#"><i class="far fa-times-circle"></i></a></td>
-                <td><img src=${imgmapper[item.tag]} alt=""></td>
-                <td>${item.tag}</td>
-                <td>Rs ${item.price}</td>
-                <td><input type="number" value="${item.inCart}"></td>
-                <td>Rs ${item.price*item.inCart}</td>
-            </tr>
-            `
-        });
+          productContainer.innerHTML += `
+          <tr>
+              <td><a href="#"><i class="far fa-times-circle"></i></a></td>
+              <td><img src=${imgmapper[item.tag]} alt=""></td>
+              <td>${item.tag}</td>
+              <td>Rs ${item.price}</td>
+              <td><input type="number" value="${item.inCart}"></td>
+              <td>Rs ${item.price*item.inCart}</td>
+          </tr>
+          `
+      });
         productContainer.innerHTML += `
         <div class="basketTotalContainer">
             <h4 class="basketTotalTitle">Basket Total</h4>
             <h4 class="basketTotal">Rs ${cartCost}</h4>
         </div>
+        <div class="checkout"><button class="normal" onclick="checkout()">Place Order</button></div>
         `
     }
 
+}
+function checkout(){
+  emptyCart();
+  alert("Your order has been placed successfully.");
+}
+
+function emptyCart(){
+  localStorage.clear();
+  location.reload();
 }
 displayCart();
 onLoadCartNumbers();

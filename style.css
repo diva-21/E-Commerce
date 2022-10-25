@@ -531,6 +531,17 @@ footer .copyright{
     margin-left: 50px;
     width: 50%;
 }
+.checkout{
+    margin-left: 980px;
+}
+.checkout button{
+    background-color: #088178;
+    color: white;
+    white-space: nowrap;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
 
 /* Media Query */
 
