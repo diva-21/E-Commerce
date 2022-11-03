@@ -187,6 +187,7 @@ function displayCart(){
     }
 
 }
+// bug founf
 function checkout(){
   emptyCart();
   alert("Your order has been placed successfully.");
